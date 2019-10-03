@@ -1,0 +1,198 @@
+<html>
+<head>
+<meta http-equiv="refresh" content="600">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.1/leaflet.css" />
+
+</head>
+<body>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.1/leaflet.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-gpx/1.4.0/gpx.min.js"></script>
+
+
+    <div id="mapid" style="width: 1500px; height: 400px; position: absolute; left:50px; top:30px; z-index: -1;"></div>
+    <img src = "https://i.imgur.com/FRaW404.png" style="width: 1500px; height: 409px; position: absolute; left:50px; top:30px;z-index: 1;">
+    </div>
+    <script>
+
+
+	var mymap = L.map('mapid').setView([53.35, -6.22], 8);
+	var layerGroup = L.layerGroup().addTo(mymap);
+
+
+L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: 'Crumlin Childrens Hospital  &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; '
+}).addTo(mymap);
+
+	var gpx = '/examples/oracle.gpx'; // URL to your GPX file or the GPX itself
+new L.GPX(gpx, {
+async: true,
+marker_options: {
+    startIconUrl: 'https://upload.wikimedia.org/wikipedia/commons/5/59/Empty.png',
+    endIconUrl: 'https://upload.wikimedia.org/wikipedia/commons/5/59/Empty.png',
+    shadowUrl: 'https://upload.wikimedia.org/wikipedia/commons/5/59/Empty.png'
+  },
+
+  polyline_options: {
+    color: 'black',
+    opacity: 0.75,
+    weight: 6,
+    lineCap: 'round'
+  }
+
+}).on('loaded', function(e) {
+  mymap.fitBounds(e.target.getBounds());
+}).addTo(mymap);
+
+
+         //Extend the Default marker class
+         var RedIcon1 = L.Icon.extend({
+            options: {
+            	    iconUrl: 'https://i.imgur.com/F2tIHi0.png',
+		iconSize:     [70, 70],
+		shadowSize:   [0, 0],
+		iconAnchor:   [25, 50],
+		shadowAnchor: [0, 0],
+		popupAnchor:  [0, 0]
+		   }
+
+         });
+
+
+</script>
+
+
+<script>
+
+var repeat = true;
+var val= 0;
+console.log("bad:"+val); //////////////////////////////////////////////////////////////////////
+
+$.get('API URL', function(data, status){
+  var str = JSON.stringify(data);
+  var res = str.split("\"");
+var markerLocation = new L.LatLng((res[3]),(res[7]));
+var redIcon1 = new RedIcon1();
+L.marker(markerLocation, {icon: redIcon1}).addTo(layerGroup);
+});
+setInterval (function(){
+
+  console.log("val0:"+val); //////////////////////////////////////////////////////////////////////
+  $.get('API URL', function(data, status){
+    var str = JSON.stringify(data);
+  	var res = str.split("\"");
+    layerGroup.clearLayers();
+	var markerLocation = new L.LatLng((res[3]),(res[7]));
+	var redIcon1 = new RedIcon1();
+  L.marker(markerLocation, {icon: redIcon1}).addTo(layerGroup);
+
+//https://i.imgur.com/SgsFsUt.png
+//https://i.imgur.com/FRaW404.png
+
+});
+}, 150000);
+
+</script>
+
+<p> </p>
+<p> </p>
+
+<p> </p>
+<p> </p>
+
+<script>
+//BREAK----------------------------------------------------------------------------------------------------------------------
+</script>
+
+
+<div>
+
+<div id="mapidy" style="width: 1500px; height: 400px; position: absolute; left:50px; top:460px; z-index: -1;"></div>
+<img src = "https://i.imgur.com/SgsFsUt.png" style="width: 1500px; height: 409px; position: absolute; left:50px; top:460px;z-index: 1;">
+</div>
+<script>
+
+var mymapy = L.map('mapidy').setView([53.379467, -6.16043], 13);
+var layerGroup1 = L.layerGroup().addTo(mymapy);
+
+L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+attribution: 'Crumlin Childrens Hospital  &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; '
+}).addTo(mymapy);
+
+var gpx = '/examples/howthnew.gpx'; // URL to your GPX file or the GPX itself
+new L.GPX(gpx, {
+async: true,
+marker_options: {
+  startIconUrl: 'https://upload.wikimedia.org/wikipedia/commons/5/59/Empty.png',
+  endIconUrl: 'https://upload.wikimedia.org/wikipedia/commons/5/59/Empty.png',
+  shadowUrl: 'https://upload.wikimedia.org/wikipedia/commons/5/59/Empty.png'
+},
+
+polyline_options: {
+  color: 'red',
+  opacity: 0.70,
+  weight: 5,
+  lineCap: 'round'
+}
+
+}).on('loaded', function(e) {
+//mymapy.fitBounds(e.target.getBounds());
+}).addTo(mymapy);
+       //Extend the Default marker class
+       var RedIcon = L.Icon.extend({
+          options: {
+                iconUrl: 'https://i.imgur.com/nPgkbgZ.png',
+                //https://i.imgur.com/xjV32U8.png
+  iconSize:     [70, 70],
+  shadowSize:   [0, 0],
+  iconAnchor:   [35, 70],
+  shadowAnchor: [0, 0],
+  popupAnchor:  [35, 70]
+     }
+
+       });
+
+
+</script>
+
+
+
+<script>
+
+var repeat = true;
+var val= 0;
+console.log("bad:"+val); //////////////////////////////////////////////////////////////////////
+
+$.get('API URL', function(data, status){
+  var str = JSON.stringify(data);
+  var res = str.split("\"");
+var markerLocation = new L.LatLng((res[3]),(res[7]));
+var redIcon = new RedIcon();
+L.marker(markerLocation, {icon: redIcon}).addTo(layerGroup1);
+});
+
+
+
+setInterval (function(){
+
+console.log("val0:"+val); //////////////////////////////////////////////////////////////////////
+
+$.get('API URL', function(data, status){
+  var str = JSON.stringify(data);
+  var res = str.split("\"");
+var markerLocation = new L.LatLng((res[3]),(res[7]));
+layerGroup1.clearLayers();
+var redIcon = new RedIcon();
+L.marker(markerLocation, {icon: redIcon}).addTo(layerGroup1);
+
+});
+}, 120000);
+
+</script>
+
+
+</body>
+</html>
